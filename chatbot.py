@@ -88,7 +88,7 @@ while end == False:
             newsCheck = "news"
             wellBeing = "how are you"
             wellBeingGood = ["happy", "great", "good", "amazing"]
-            wellBeingSad = ["sad", "unhappy", "upset", "not good"]
+            wellBeingSad = ["sad", "unhappy", "upset", "not", "unwell"]
             
             if("hello" in myText):
                 if(wellBeing in myText):
@@ -110,7 +110,7 @@ while end == False:
                 elif(dateCheck in myText):
                     engine.say("Good day Sir,Todays date is" +x)
                 else:
-                    engine.say("Good day Sir, how may I assist?")
+                    engine.say("Good day Sir")
                 engine.runAndWait()
                 end = False
                 
@@ -169,6 +169,7 @@ while end == False:
                     os.startfile("C:\\Users\\Radius\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Discord Inc\\Discord.lnk")
                 if(second=="Spotify"):
                     os.startfile("C:\\Users\\Radius\\AppData\\Roaming\\Spotify\\Spotify.exe")
+                    os.system("open /Applications/Spotify.app")
                 if(second=="Minecraft"):
                     os.startfile("G:\\Minecraft\\MinecraftLauncher.exe")
                 if(second=="paint"):
@@ -198,6 +199,20 @@ while end == False:
                 elif(second=="Outlook"):
                     webbrowser.open("https://outlook.com")    
                 end = False
+
+            elif(first=="logout"):
+                engine.say("Are you sure you want to do this Sir")
+                engine.runAndWait()
+                print("Say yes or no")
+                audio_text = r.listen(source)
+                myText =r.recognize_google(audio_text)
+                if("no" in myText):
+                    end = False
+                elif("yes" in myText):
+                    os.system("shutdown -l")
+                else:
+                    end = False
+                
                 
             elif(first=="search"):
                 engine.say("One moment Sir")
@@ -218,6 +233,13 @@ while end == False:
                 engine.say("The answer is ")
                 engine.runAndWait()
                 finsum = calc(int(second), third, int(fourth))
+                engine.say(finsum)                
+                engine.runAndWait()
+                end = False
+            elif(second=="calculate"):
+                engine.say("The answer is ")
+                engine.runAndWait()
+                finsum = calc(int(third), fourth, int(fifth))
                 engine.say(finsum)                
                 engine.runAndWait()
                 end = False

@@ -144,6 +144,9 @@ while end == False:
              
 #pip install SpeechRecognition
 #pip install PyAudio
+#pip install gtts
+#pip install playsound
+#pip install webbrowser
 """
 could use a file which contains user personalised charateristics to use in conversation and could setup new one if user doesnt have one
 eventually get it to open any application, search the web, turn off computer or restart or log off,

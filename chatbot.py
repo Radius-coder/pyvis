@@ -1,9 +1,12 @@
 #import library
+import datetime
 import os
 from gtts import gTTS
 from playsound import playsound
 import speech_recognition as sr 
 import webbrowser
+
+
 
 
 # Initialize recognizer class (for recognizing the speech)
@@ -13,17 +16,17 @@ end = False
 # Reading Microphone as source
 # listening the speech and store in audio_text variable
 while end == False:
-    
+
     with sr.Microphone() as source:
         print("Yes Sir?")
         audio_text = r.listen(source)
         print("One second...")
     # recoginize_() method will throw a request error if the API is unreachable, hence using exception handling
-        
+
         try:
             myText =r.recognize_google(audio_text)
             print(myText)
-
+            
             #breaking up words for searches
             splitted = myText.split()
             first = splitted[0]
@@ -59,14 +62,26 @@ while end == False:
                 query = third+" "+fourth+" "+fifth+" "+sixth
 
 
+            weatherCheck = "weather"
+            newsCheck = "news"
             
-            
-            if(myText=="good morning"):
+            if(myText=="hello Jarvis"):
                 playsound(".\good.mp3")
                 end = False
                 
             elif(myText=="play me xxx"):
                 playsound(".\Meekz.mp3")
+                end = False
+
+            elif(myText=="what is the date"):
+                playsound(".\date.mp3")
+                end = False
+
+            elif(weatherCheck in myText):
+                webbrowser.open("https://www.google.com/search?q=weather")
+                end = False
+            elif(newsCheck in myText):
+                webbrowser.open("https://www.google.com/search?q=news&sxsrf=ALeKk036rurS9ta79jzA6DCqMbECvw_fJw:1604718973065&source=lnms&tbm=nws&sa=X&ved=2ahUKEwi4_emCvO_sAhUColwKHf0oDSMQ_AUoAXoECA8QAw&biw=958&bih=919")
                 end = False
 
             if(first=="open"):

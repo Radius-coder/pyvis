@@ -26,6 +26,8 @@ while end == False:
             splitted = myText.split()
             first = splitted[0]
             second = splitted[1]
+            third = splitted[2]
+            
             
             if(myText=="good morning"):
                 playsound(".\good.mp3")
@@ -35,14 +37,25 @@ while end == False:
                 playsound(".\Meekz.mp3")
                 end = False
 
-            elif(first=="open"):
+            if(first=="open"):
                 playsound(".\open.mp3")
                 if(second=="Steam"):
                     os.startfile("G:\\Steam\\New folder\\steam.exe")
                     end = False
                 elif(second=="YouTube"):
                     webbrowser.open("https://youtube.com")
-                    
+                    end = False
+            elif(first=="play"):
+                playsound(".\open.mp3")
+                song = (second+"_"+third)
+                webbrowser.open("https://youtube.com/results?search_query=" + song)
+                end = False
+            elif(first=="search"):
+                playsound(".\open.mp3")
+                if(second=="Google"):
+                    webbrowser.open("https://www.google.com/search?q=" + third)
+                elif(second=="Bing"):
+                    webbrowser.open("https://www.bing.com/search?q=" + third)
             if(myText=="goodbye"):
                  end = True
                 

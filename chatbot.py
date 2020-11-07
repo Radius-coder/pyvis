@@ -6,8 +6,9 @@ import speech_recognition as sr
 import webbrowser
 import pyttsx3
 engine = pyttsx3.init()
-
-print("Welcome to Jarvis.\nSay open 'website or application', search 'website and query', weather, news,\ndate, calculate 'sum'") 
+engine.say("Welcome back Sir")
+engine.runAndWait()
+print("Say open 'website or application', search 'website and query', weather, news,\ndate, calculate 'sum'") 
 
 # Initialize recognizer class (for recognizing the speech)
 r = sr.Recognizer()
@@ -57,25 +58,21 @@ while end == False:
             first = splitted[0]
             if(len(splitted)==2):
                 second =splitted[1]
-                song = second
                 query = second
             if(len(splitted)==3):
                 second =splitted[1]
                 third =splitted[2]
-                song = second+"_"+third
                 query = third
             if(len(splitted)==4):
                 second =splitted[1]
                 third =splitted[2]
                 fourth =splitted[3]
-                song = second+"_"+third+"_"+fourth
                 query = third+" "+fourth
             if(len(splitted)==5):
                 second =splitted[1]
                 third =splitted[2]
                 fourth =splitted[3]
                 fifth =splitted[4]
-                song = second+"_"+third+"_"+fourth+"_"+fifth
                 query = third+" "+fourth+" "+fifth
             if(len(splitted)==6):
                 second =splitted[1]
@@ -83,17 +80,33 @@ while end == False:
                 fourth =splitted[3]
                 fifth =splitted[4]
                 sixth =splitted[5]
-                song = second+"_"+third+"_"+fourth+"_"+fifth+"_"+sixth
                 query = third+" "+fourth+" "+fifth+" "+sixth
 
+            #general shortcuts and sentence activation
             dateCheck = "the date"
             weatherCheck = "weather"
             newsCheck = "news"
             wellBeing = "how are you"
+            wellBeingGood = ["happy", "great", "good", "amazing"]
+            wellBeingSad = ["sad", "unhappy", "upset", "not good"]
             
             if("hello" in myText):
                 if(wellBeing in myText):
                     engine.say("Good day Sir, I am well Sir, how are you today?")
+                    engine.runAndWait()
+                    audio_text = r.listen(source)
+                    myText =r.recognize_google(audio_text)
+                    for i in wellBeingSad:
+                        if(i in myText):
+                            engine.say("Maybe this will make you smile")
+                            engine.runAndWait()
+                            webbrowser.open("https://youtu.be/SB-qEYVdvXA")
+                            end = False
+                    for j in wellBeingGood:
+                        if(j in myText):
+                            engine.say("Good to hear Sir, how may I assist?")
+                            engine.runAndWait()
+                            end = False
                 elif(dateCheck in myText):
                     engine.say("Good day Sir,Todays date is" +x)
                 else:
@@ -104,8 +117,22 @@ while end == False:
             elif(wellBeing in myText):
                 engine.say("I am well sir, how are you today?")
                 engine.runAndWait()
+                audio_text = r.listen(source)
+                myText =r.recognize_google(audio_text)
+                for i in wellBeingSad:
+                    if(i in myText):
+                        engine.say("Maybe this will make you smile")
+                        engine.runAndWait()
+                        webbrowser.open("https://youtu.be/SB-qEYVdvXA")
+                        end = False
+                for j in wellBeingGood:
+                    if(j in myText):
+                        engine.say("Good to hear Sir, how may I assist?")
+                        engine.runAndWait()
+                        end = False
                 end = False
 
+            
             elif("thank you" in myText):
                 engine.say("My pleasure Sir")
                 engine.runAndWait()
@@ -125,6 +152,7 @@ while end == False:
                 engine.runAndWait()
                 webbrowser.open("https://www.google.com/search?q=weather")
                 end = False
+                
             elif(newsCheck in myText):
                 engine.say("Just a moment Sir")
                 engine.runAndWait()
@@ -168,9 +196,9 @@ while end == False:
                     if(third =="UWE"):
                         webbrowser.open("https://my.uwe.ac.uk")
                 elif(second=="Outlook"):
-                    webbrowser.open("https://outlook.com")
-                    
+                    webbrowser.open("https://outlook.com")    
                 end = False
+                
             elif(first=="search"):
                 engine.say("One moment Sir")
                 engine.runAndWait()
@@ -196,6 +224,10 @@ while end == False:
                 
             if("bye" in myText):
                  engine.say("Pleasure Sir")
+                 engine.runAndWait()
+                 end = True
+            if("SIA" in myText):
+                 engine.say("See you later Sir")
                  engine.runAndWait()
                  end = True
                 

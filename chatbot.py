@@ -8,7 +8,7 @@ import pyttsx3
 engine = pyttsx3.init()
 engine.say("Welcome back Sir")
 engine.runAndWait()
-print("Say open 'website or application', search 'website and query', weather, news,\ndate, calculate 'sum'") 
+print("Say open 'website or application', search 'website and query', weather, news,\ndate, calculate 'sum', play song 'name' play video 'name'") 
 
 # Initialize recognizer class (for recognizing the speech)
 r = sr.Recognizer()
@@ -138,9 +138,6 @@ while end == False:
                 engine.runAndWait()
                 end = False
                 
-            elif(myText=="play me xxx"):
-                playsound(".\Meekz.mp3")
-                end = False
 
             elif(dateCheck in myText):
                 engine.say(x)
@@ -255,6 +252,15 @@ while end == False:
                  engine.say("See you later Sir")
                  engine.runAndWait()
                  end = True
+
+            elif(first == "play"):
+                if(second=="song"):                  
+                    os.startfile(query+".mp3")
+                if(second=="music"):                  
+                    os.startfile(query+".mp3")
+                elif(second=="video"):
+                    os.startfile(query+".mp4")
+                end = False
                 
         except:
              print("Sorry, I did not get that, try again")

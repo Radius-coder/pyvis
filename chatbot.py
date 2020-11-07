@@ -1,13 +1,13 @@
 #import library
 import datetime
 import os
-from gtts import gTTS
 from playsound import playsound
 import speech_recognition as sr 
 import webbrowser
+import pyttsx3
+engine = pyttsx3.init()
 
-
-
+print("Welcome to Jarvis.\nSay open 'website or application', search 'website and query', weather or news")
 
 # Initialize recognizer class (for recognizing the speech)
 r = sr.Recognizer()
@@ -16,7 +16,9 @@ end = False
 # Reading Microphone as source
 # listening the speech and store in audio_text variable
 while end == False:
-
+    #get today's date
+    date = datetime.datetime.now()
+    x = date.strftime("%d"+" %B, %Y")
     with sr.Microphone() as source:
         print("Yes Sir?")
         audio_text = r.listen(source)
@@ -61,31 +63,55 @@ while end == False:
                 song = second+"_"+third+"_"+fourth+"_"+fifth+"_"+sixth
                 query = third+" "+fourth+" "+fifth+" "+sixth
 
-
+            dateCheck = "the date"
             weatherCheck = "weather"
             newsCheck = "news"
+            wellBeing = "how are you"
             
-            if(myText=="hello Jarvis"):
-                playsound(".\good.mp3")
+            if("hello Jarvis" in myText):
+                if(wellBeing in myText):
+                    engine.say("Good day Sir, I am well Sir, how are you today?")
+                elif(dateCheck in myText):
+                    engine.say("Good day Sir,Todays date is" +x)
+                else:
+                    engine.say("Good day Sir, how may I assist?")
+                engine.runAndWait()
+                end = False
+                
+            elif(wellBeing in myText):
+                engine.say("I am well sir, how are you today?")
+                engine.runAndWait()
+                end = False
+
+            elif(myText=="thank you"):
+                engine.say("My pleasure Sir")
+                engine.runAndWait()
                 end = False
                 
             elif(myText=="play me xxx"):
                 playsound(".\Meekz.mp3")
                 end = False
 
-            elif(myText=="what is the date"):
-                playsound(".\date.mp3")
+            elif(dateCheck in myText):
+                engine.say(x)
+                engine.runAndWait()
                 end = False
 
             elif(weatherCheck in myText):
+                engine.say("Just a moment Sir")
+                engine.runAndWait()
                 webbrowser.open("https://www.google.com/search?q=weather")
                 end = False
             elif(newsCheck in myText):
+                engine.say("Just a moment Sir")
+                engine.runAndWait()
                 webbrowser.open("https://www.google.com/search?q=news&sxsrf=ALeKk036rurS9ta79jzA6DCqMbECvw_fJw:1604718973065&source=lnms&tbm=nws&sa=X&ved=2ahUKEwi4_emCvO_sAhUColwKHf0oDSMQ_AUoAXoECA8QAw&biw=958&bih=919")
                 end = False
+            
 
             if(first=="open"):
-                playsound(".\open.mp3")
+                engine.say("One moment Sir")
+                engine.runAndWait()
                 if(second=="Steam"):
                     os.startfile("G:\\Steam\\New folder\\steam.exe")
                 if(second=="discord"):
@@ -123,7 +149,8 @@ while end == False:
                     
                 end = False
             elif(first=="search"):
-                playsound(".\open.mp3")
+                engine.say("One moment Sir")
+                engine.runAndWait()
                 if(second=="Google"):
                     webbrowser.open("https://www.google.com/search?q=" + query)
                 elif(second=="Bing"):
@@ -136,6 +163,8 @@ while end == False:
                     webbrowser.open("https://en.wikipedia.org/wiki/" + query)
                 end = False
             if(myText=="goodbye"):
+                 engine.say("Pleasure Sir")
+                 engine.runAndWait()
                  end = True
                 
         except:
@@ -144,9 +173,8 @@ while end == False:
              
 #pip install SpeechRecognition
 #pip install PyAudio
-#pip install gtts
 #pip install playsound
-#pip install webbrowser
+#pip install pyttsx3
 """
 could use a file which contains user personalised charateristics to use in conversation and could setup new one if user doesnt have one
 eventually get it to open any application, search the web, turn off computer or restart or log off,

@@ -179,6 +179,9 @@ while end == False:
                 if(second=="CS"):
                     if(third=="GO"):
                         os.startfile("C:\\Users\\Radius\\Desktop\\Counter-Strike Global Offensive.url")
+                if(second=="new"):
+                    if(third=="tab"):
+                        webbrowser.open("https://google.com")
                 elif(second=="YouTube"):
                     webbrowser.open("https://youtube.com")
                 elif(second=="Gmail"):

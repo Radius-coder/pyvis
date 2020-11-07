@@ -6,6 +6,11 @@ import speech_recognition as sr
 import webbrowser
 import pyttsx3
 engine = pyttsx3.init()
+engine.setProperty("rate", 168)
+
+voice_id = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-GB_HAZEL_11.0"
+# Use british female voice 
+engine.setProperty('voice', voice_id)
 engine.say("Welcome back Sir")
 engine.runAndWait()
 print("Say open 'website or application', search 'website and query', weather, news,\ndate, calculate 'sum', play song 'name' play video 'name'") 
@@ -51,6 +56,7 @@ while end == False:
 
         try:
             myText =r.recognize_google(audio_text)
+            myText = myText.lower()
             print(myText)
             
             #breaking up words for searches
@@ -113,7 +119,54 @@ while end == False:
                     engine.say("Good day Sir")
                 engine.runAndWait()
                 end = False
-                
+
+            if("hi" in myText):
+                if(wellBeing in myText):
+                    engine.say("Good day Sir, I am well Sir, how are you today?")
+                    engine.runAndWait()
+                    audio_text = r.listen(source)
+                    myText =r.recognize_google(audio_text)
+                    for i in wellBeingSad:
+                        if(i in myText):
+                            engine.say("Maybe this will make you smile")
+                            engine.runAndWait()
+                            webbrowser.open("https://youtu.be/SB-qEYVdvXA")
+                            end = False
+                    for j in wellBeingGood:
+                        if(j in myText):
+                            engine.say("Good to hear Sir, how may I assist?")
+                            engine.runAndWait()
+                            end = False
+                elif(dateCheck in myText):
+                    engine.say("Good day Sir,Todays date is" +x)
+                else:
+                    engine.say("Good day Sir")
+                engine.runAndWait()
+                end = False
+
+            if("hey" in myText):
+                if(wellBeing in myText):
+                    engine.say("Good day Sir, I am well Sir, how are you today?")
+                    engine.runAndWait()
+                    audio_text = r.listen(source)
+                    myText =r.recognize_google(audio_text)
+                    for i in wellBeingSad:
+                        if(i in myText):
+                            engine.say("Maybe this will make you smile")
+                            engine.runAndWait()
+                            webbrowser.open("https://youtu.be/SB-qEYVdvXA")
+                            end = False
+                    for j in wellBeingGood:
+                        if(j in myText):
+                            engine.say("Good to hear Sir, how may I assist?")
+                            engine.runAndWait()
+                            end = False
+                elif(dateCheck in myText):
+                    engine.say("Good day Sir,Todays date is" +x)
+                else:
+                    engine.say("Good day Sir")
+                engine.runAndWait()
+                end = False
             elif(wellBeing in myText):
                 engine.say("I am well sir, how are you today?")
                 engine.runAndWait()
@@ -160,44 +213,59 @@ while end == False:
             if(first=="open"):
                 engine.say("One moment Sir")
                 engine.runAndWait()
-                if(second=="Steam"):
+                if(second=="google"):
+                    webbrowser.open("https://www.google.com")
+                if(second=="steam"):
                     os.startfile("G:\\Steam\\New folder\\steam.exe")
                 if(second=="discord"):
                     os.startfile("C:\\Users\\Radius\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Discord Inc\\Discord.lnk")
-                if(second=="Spotify"):
+                if(second=="spotify"):
                     os.startfile("C:\\Users\\Radius\\AppData\\Roaming\\Spotify\\Spotify.exe")
                     os.system("open /Applications/Spotify.app")
-                if(second=="Minecraft"):
+                if(second=="minecraft"):
                     os.startfile("G:\\Minecraft\\MinecraftLauncher.exe")
                 if(second=="paint"):
                     os.startfile("C:\\WINDOWS\\system32\\mspaint.exe")
                 if(second=="audacity"):
                     os.startfile("C:\\Program Files (x86)\\Audacity\\audacity.exe")
-                if(second=="CS"):
-                    if(third=="GO"):
+                if(second=="visual"):
+                    if(third=="code"):
+                        os.startfile("C:\\Users\\Radius\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe")
+                    elif(third=="studio"):
+                        os.startfile("D:\\vs\\Common7\\IDE\\devenv.exe")
+                if(second=="cs"):
+                    if(third=="go"):
                         os.startfile("C:\\Users\\Radius\\Desktop\\Counter-Strike Global Offensive.url")
                 if(second=="new"):
                     if(third=="tab"):
                         webbrowser.open("https://google.com")
-                elif(second=="YouTube"):
+                elif(second=="youtube"):
                     webbrowser.open("https://youtube.com")
-                elif(second=="Gmail"):
+                elif(second=="google"):
+                    if(third=="keep"):
+                        res = "https://keep.google.com"
+                    elif(third=="mail"):
+                        res="https://gmail.com"
+                    webbrowser.open(res)
+                elif(second=="gmail"):
                     webbrowser.open("https://gmail.com")
-                elif(second=="Amazon"):
+                elif(second=="amazon"):
                     webbrowser.open("https://amazon.co.uk")
-                elif(second=="Futurama"):
+                elif(second=="futurama"):
                     webbrowser.open("https://www.amazon.co.uk/gp/video/detail/0NYGDOILXA7CWK7FU7260JNXS4/ref=atv_sf_stream_prime_hd_ep?autoplay=1")
-                elif(third=="Grand"):
+                elif("grand tour" in myText):
                     webbrowser.open("https://www.amazon.co.uk/gp/video/detail/0G0VPA8QYRIR5GCAJNET1RCJGJ/ref=atv_sf_stream_prime_hd_ep?autoplay=1&t=0")
-                elif(second=="Facebook"):
+                elif(second=="facebook"):
                     webbrowser.open("https://facebook.com")
-                elif(second=="Twitter"):
+                elif(second=="twitter"):
                     webbrowser.open("https://twitter.com")
                 elif(second=="my"):
-                    if(third =="UWE"):
+                    if(third =="uwe"):
                         webbrowser.open("https://my.uwe.ac.uk")
-                elif(second=="Outlook"):
-                    webbrowser.open("https://outlook.com")    
+                elif(second=="outlook"):
+                    webbrowser.open("https://outlook.com")
+                elif(second=="github"):
+                    webbrowser.open("https://github.com/Radius-coder/pyvis") 
                 end = False
 
             elif(first=="logout"):
@@ -217,15 +285,15 @@ while end == False:
             elif(first=="search"):
                 engine.say("One moment Sir")
                 engine.runAndWait()
-                if(second=="Google"):
+                if(second=="google"):
                     webbrowser.open("https://www.google.com/search?q=" + query)
-                elif(second=="Bing"):
+                elif(second=="bing"):
                     webbrowser.open("https://www.bing.com/search?q=" + query)
-                elif(second=="YouTube"):
+                elif(second=="youtube"):
                     webbrowser.open("https://youtube.com/results?search_query=" + query)
                 elif(second=="wiki"):
                     webbrowser.open("https://en.wikipedia.org/wiki/" + query)
-                elif(second=="Wikipedia"):
+                elif(second=="wikipedia"):
                     webbrowser.open("https://en.wikipedia.org/wiki/" + query)
                 end = False
 
@@ -243,16 +311,8 @@ while end == False:
                 engine.say(finsum)                
                 engine.runAndWait()
                 end = False
-                
-            if("bye" in myText):
-                 engine.say("Pleasure Sir")
-                 engine.runAndWait()
-                 end = True
-            if("SIA" in myText):
-                 engine.say("See you later Sir")
-                 engine.runAndWait()
-                 end = True
 
+            
             elif(first == "play"):
                 if(second=="song"):                  
                     os.startfile(query+".mp3")
@@ -261,6 +321,16 @@ while end == False:
                 elif(second=="video"):
                     os.startfile(query+".mp4")
                 end = False
+                
+            if("bye" in myText):
+                 engine.say("Pleasure Sir")
+                 engine.runAndWait()
+                 end = True
+            if("sia" in myText):
+                 engine.say("See you later Sir")
+                 engine.runAndWait()
+                 end = True
+
                 
         except:
              print("Sorry, I did not get that, try again")

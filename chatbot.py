@@ -7,12 +7,35 @@ import webbrowser
 import pyttsx3
 engine = pyttsx3.init()
 
-print("Welcome to Jarvis.\nSay open 'website or application', search 'website and query', weather or news")
+print("Welcome to Jarvis.\nSay open 'website or application', search 'website and query', weather, news,\ndate, calculate 'sum'") 
 
 # Initialize recognizer class (for recognizing the speech)
 r = sr.Recognizer()
 end = False
 
+
+
+#calculator funciton
+def calc(a,op,b):
+    if op=="+":
+        answer = a+b
+        return answer
+    elif op=="-":
+        answer = a-b
+        return answer
+    elif op=="x":
+        answer = a*b
+        return answer
+    elif op=="/":
+        if a == 0 | b == 0:
+            print("cannot divide by 0")
+        else:
+            answer = a/b
+            return answer
+    else:
+        print("Please calculate a valid sum")
+
+        
 # Reading Microphone as source
 # listening the speech and store in audio_text variable
 while end == False:
@@ -68,7 +91,7 @@ while end == False:
             newsCheck = "news"
             wellBeing = "how are you"
             
-            if("hello Jarvis" in myText):
+            if("hello" in myText):
                 if(wellBeing in myText):
                     engine.say("Good day Sir, I am well Sir, how are you today?")
                 elif(dateCheck in myText):
@@ -83,7 +106,7 @@ while end == False:
                 engine.runAndWait()
                 end = False
 
-            elif(myText=="thank you"):
+            elif("thank you" in myText):
                 engine.say("My pleasure Sir")
                 engine.runAndWait()
                 end = False
@@ -162,7 +185,16 @@ while end == False:
                 elif(second=="Wikipedia"):
                     webbrowser.open("https://en.wikipedia.org/wiki/" + query)
                 end = False
-            if(myText=="goodbye"):
+
+            elif(first=="calculate"):
+                engine.say("The answer is ")
+                engine.runAndWait()
+                finsum = calc(int(second), third, int(fourth))
+                engine.say(finsum)                
+                engine.runAndWait()
+                end = False
+                
+            if("bye" in myText):
                  engine.say("Pleasure Sir")
                  engine.runAndWait()
                  end = True

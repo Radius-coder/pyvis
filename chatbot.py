@@ -10,12 +10,6 @@ import webbrowser
 r = sr.Recognizer()
 end = False
 
-#load audio files
-print("Loading audio...")
-tts = gTTS(text='Good day Sir. How may I assist you today?', lang='en')
-tts.save("good.mp3")
-print("Audio loaded!")
-
 # Reading Microphone as source
 # listening the speech and store in audio_text variable
 while end == False:
@@ -29,6 +23,9 @@ while end == False:
         try:
             myText =r.recognize_google(audio_text)
             print(myText)
+            splitted = myText.split()
+            first = splitted[0]
+            second = splitted[1]
             
             if(myText=="good morning"):
                 playsound(".\good.mp3")
@@ -37,16 +34,15 @@ while end == False:
             elif(myText=="play me xxx"):
                 playsound(".\Meekz.mp3")
                 end = False
-                
-            elif(myText=="open Steam"):
-                playsound(".\open.mp3")
-                os.startfile("G:\\Steam\\New folder\\steam.exe")
-                end = False
 
-            elif(myText=="open YouTube"):
-                webbrowser.open("https://youtube.com")
-                end = False
-                
+            elif(first=="open"):
+                playsound(".\open.mp3")
+                if(second=="Steam"):
+                    os.startfile("G:\\Steam\\New folder\\steam.exe")
+                    end = False
+                elif(second=="YouTube"):
+                    webbrowser.open("https://youtube.com")
+                    
             if(myText=="goodbye"):
                  end = True
                 

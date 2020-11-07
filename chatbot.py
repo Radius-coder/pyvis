@@ -73,21 +73,53 @@ while end == False:
                 playsound(".\open.mp3")
                 if(second=="Steam"):
                     os.startfile("G:\\Steam\\New folder\\steam.exe")
-                    end = False
+                if(second=="discord"):
+                    os.startfile("C:\\Users\\Radius\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Discord Inc\\Discord.lnk")
+                if(second=="Spotify"):
+                    os.startfile("C:\\Users\\Radius\\AppData\\Roaming\\Spotify\\Spotify.exe")
+                if(second=="Minecraft"):
+                    os.startfile("G:\\Minecraft\\MinecraftLauncher.exe")
+                if(second=="paint"):
+                    os.startfile("C:\\WINDOWS\\system32\\mspaint.exe")
+                if(second=="audacity"):
+                    os.startfile("C:\\Program Files (x86)\\Audacity\\audacity.exe")
+                if(second=="CS"):
+                    if(third=="GO"):
+                        os.startfile("C:\\Users\\Radius\\Desktop\\Counter-Strike Global Offensive.url")
                 elif(second=="YouTube"):
                     webbrowser.open("https://youtube.com")
-                    end = False
-            elif(first=="play"):
-                playsound(".\open.mp3")
-                webbrowser.open("https://youtube.com/results?search_query=" + song)
+                elif(second=="Gmail"):
+                    webbrowser.open("https://gmail.com")
+                elif(second=="Amazon"):
+                    webbrowser.open("https://amazon.co.uk")
+                elif(second=="Futurama"):
+                    webbrowser.open("https://www.amazon.co.uk/gp/video/detail/0NYGDOILXA7CWK7FU7260JNXS4/ref=atv_sf_stream_prime_hd_ep?autoplay=1")
+                elif(third=="Grand"):
+                    webbrowser.open("https://www.amazon.co.uk/gp/video/detail/0G0VPA8QYRIR5GCAJNET1RCJGJ/ref=atv_sf_stream_prime_hd_ep?autoplay=1&t=0")
+                elif(second=="Facebook"):
+                    webbrowser.open("https://facebook.com")
+                elif(second=="Twitter"):
+                    webbrowser.open("https://twitter.com")
+                elif(second=="my"):
+                    if(third =="UWE"):
+                        webbrowser.open("https://my.uwe.ac.uk")
+                elif(second=="Outlook"):
+                    webbrowser.open("https://outlook.com")
+                    
                 end = False
             elif(first=="search"):
                 playsound(".\open.mp3")
-                webbrowser.open("https://www.google.com/search?q=" + query)
                 if(second=="Google"):
                     webbrowser.open("https://www.google.com/search?q=" + query)
                 elif(second=="Bing"):
                     webbrowser.open("https://www.bing.com/search?q=" + query)
+                elif(second=="YouTube"):
+                    webbrowser.open("https://youtube.com/results?search_query=" + query)
+                elif(second=="wiki"):
+                    webbrowser.open("https://en.wikipedia.org/wiki/" + query)
+                elif(second=="Wikipedia"):
+                    webbrowser.open("https://en.wikipedia.org/wiki/" + query)
+                end = False
             if(myText=="goodbye"):
                  end = True
                 

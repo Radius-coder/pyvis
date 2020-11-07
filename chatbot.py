@@ -23,10 +23,42 @@ while end == False:
         try:
             myText =r.recognize_google(audio_text)
             print(myText)
+
+            #breaking up words for searches
             splitted = myText.split()
             first = splitted[0]
-            second = splitted[1]
-            third = splitted[2]
+            if(len(splitted)==2):
+                second =splitted[1]
+                song = second
+                query = second
+            if(len(splitted)==3):
+                second =splitted[1]
+                third =splitted[2]
+                song = second+"_"+third
+                query = third
+            if(len(splitted)==4):
+                second =splitted[1]
+                third =splitted[2]
+                fourth =splitted[3]
+                song = second+"_"+third+"_"+fourth
+                query = third+" "+fourth
+            if(len(splitted)==5):
+                second =splitted[1]
+                third =splitted[2]
+                fourth =splitted[3]
+                fifth =splitted[4]
+                song = second+"_"+third+"_"+fourth+"_"+fifth
+                query = third+" "+fourth+" "+fifth
+            if(len(splitted)==6):
+                second =splitted[1]
+                third =splitted[2]
+                fourth =splitted[3]
+                fifth =splitted[4]
+                sixth =splitted[5]
+                song = second+"_"+third+"_"+fourth+"_"+fifth+"_"+sixth
+                query = third+" "+fourth+" "+fifth+" "+sixth
+
+
             
             
             if(myText=="good morning"):
@@ -47,15 +79,15 @@ while end == False:
                     end = False
             elif(first=="play"):
                 playsound(".\open.mp3")
-                song = (second+"_"+third)
                 webbrowser.open("https://youtube.com/results?search_query=" + song)
                 end = False
             elif(first=="search"):
                 playsound(".\open.mp3")
+                webbrowser.open("https://www.google.com/search?q=" + query)
                 if(second=="Google"):
-                    webbrowser.open("https://www.google.com/search?q=" + third)
+                    webbrowser.open("https://www.google.com/search?q=" + query)
                 elif(second=="Bing"):
-                    webbrowser.open("https://www.bing.com/search?q=" + third)
+                    webbrowser.open("https://www.bing.com/search?q=" + query)
             if(myText=="goodbye"):
                  end = True
                 

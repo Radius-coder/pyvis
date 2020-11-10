@@ -2,15 +2,17 @@
 import datetime
 import os
 from playsound import playsound
+import requests
+from bs4 import BeautifulSoup 
 import speech_recognition as sr 
 import webbrowser
 import pyttsx3
 engine = pyttsx3.init()
 engine.setProperty("rate", 168)
 
-voice_id = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-GB_HAZEL_11.0"
+'''voice_id = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-GB_HAZEL_11.0"
 # Use british female voice 
-engine.setProperty('voice', voice_id)
+engine.setProperty('voice', voice_id)'''
 engine.say("Welcome back Sir")
 engine.runAndWait()
 print("Say open 'website or application', search 'website and query', weather, news,\ndate, calculate 'sum', play song 'name' play video 'name'") 
@@ -321,13 +323,39 @@ while end == False:
                     webbrowser.open("https://youtube.com/results?search_query=" + query)
                 elif(second=="wiki"):
                     webbrowser.open("https://en.wikipedia.org/wiki/" + query)
+                    url =("https://en.wikipedia.org/wiki/" + query)
                 elif(second=="wikipedia"):
                     webbrowser.open("https://en.wikipedia.org/wiki/" + query)
+                    url =("https://en.wikipedia.org/wiki/" + query)
                 elif(second=="amazon"):
                     webbrowser.open("https://www.amazon.co.uk/s?k=" + query)
 
                 end = False
-
+                
+            #reading wiki pages    
+            elif(first=="reed"):
+                #open with GET method 
+                resp=requests.get(url) 
+                              
+                 #http_respone 200 means OK status 
+                if resp.status_code==200:
+                    print("Successfully opened the web page")                               
+                    # parser 
+                    soup=BeautifulSoup(resp.text,'html.parser') 
+                    # l is the div which contains all the text   
+                    l=soup.find("div",{"class":"mw-parser-output"})        
+                    #now we want only the text part. 
+                    #find all the elements of p  
+                    for i in l.findAll("p"):
+                        engine.say(i.text)
+                        engine.runAndWait()
+                        end = False
+                else:
+                    engine.say("I could not read this page, sorry Sir")
+                    engine.runAndWait()
+                    print("Error")
+                    end = False
+                        
             elif(first=="calculate"):
                 engine.say("The answer is ")
                 engine.runAndWait()

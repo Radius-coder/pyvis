@@ -87,6 +87,34 @@ while end == False:
                 fifth =splitted[4]
                 sixth =splitted[5]
                 query = third+" "+fourth+" "+fifth+" "+sixth
+            if(len(splitted)==6):
+                second =splitted[1]
+                third =splitted[2]
+                fourth =splitted[3]
+                fifth =splitted[4]
+                sixth =splitted[5]
+                query = third+" "+fourth+" "+fifth+" "+sixth
+            if(len(splitted)==6):
+                second =splitted[1]
+                third =splitted[2]
+                fourth =splitted[3]
+                fifth =splitted[4]
+                sixth =splitted[5]
+                query = third+" "+fourth+" "+fifth+" "+sixth
+            if(len(splitted)==6):
+                second =splitted[1]
+                third =splitted[2]
+                fourth =splitted[3]
+                fifth =splitted[4]
+                sixth =splitted[5]
+                query = third+" "+fourth+" "+fifth+" "+sixth
+            if(len(splitted)==6):
+                second =splitted[1]
+                third =splitted[2]
+                fourth =splitted[3]
+                fifth =splitted[4]
+                sixth =splitted[5]
+                query = third+" "+fourth+" "+fifth+" "+sixth
 
             #general shortcuts and sentence activation
             dateCheck = "the date"
@@ -295,6 +323,9 @@ while end == False:
                     webbrowser.open("https://en.wikipedia.org/wiki/" + query)
                 elif(second=="wikipedia"):
                     webbrowser.open("https://en.wikipedia.org/wiki/" + query)
+                elif(second=="amazon"):
+                    webbrowser.open("https://www.amazon.co.uk/s?k=" + query)
+
                 end = False
 
             elif(first=="calculate"):

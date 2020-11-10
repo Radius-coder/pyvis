@@ -398,6 +398,8 @@ while end == False:
 #pip install SpeechRecognition
 #pip install PyAudio
 #pip install playsound
+#pip install requests
+#pip install BeautifulSoup 
 #pip install pyttsx3
 """
 could use a file which contains user personalised charateristics to use in conversation and could setup new one if user doesnt have one
